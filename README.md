@@ -9,7 +9,7 @@ Create user from csv file usig by [Redmine REST API](//www.redmine.org/projects/
 
 # Download
 
-Please download [here](//github.com/YoshinoriN/RedmineUserImport/releases/tag/v1.0.0.0).
+Please download [here](//github.com/YoshinoriN/RedmineUserImport/releases).
 
 # CSV
 
