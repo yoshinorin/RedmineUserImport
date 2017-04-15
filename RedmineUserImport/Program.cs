@@ -36,6 +36,7 @@ namespace RedmineUserImport
                     return;
                 }
 
+                int span = i * 1000;
                 using (var sr = new StreamReader(input[2], Encoding.UTF8))
                 using (var csv = new CsvHelper.CsvReader(sr))
                 {
@@ -43,9 +44,8 @@ namespace RedmineUserImport
                     csv.Configuration.RegisterClassMap<RedmineUserImport.UserDetailMap>();
                     var users = csv.GetRecords<UserDetail>();
 
-                    int span = i * 1000;
-                    string uri = string.Concat(input[0], userApiEndpoint, input[1]);
                     client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue(headerValue));
+                    string uri = string.Concat(input[0], userApiEndpoint, input[1]);
                     foreach (var user in users)
                     {
                         string json = Newtonsoft.Json.JsonConvert.SerializeObject(new User(user));
@@ -75,7 +75,7 @@ namespace RedmineUserImport
             {
                 client.Dispose();
                 WriteLog("[INFO] " + DateTime.Now + " Finish.");
-                Console.WriteLine(Environment.NewLine + "Finihs. Please enter any keys.");
+                Console.WriteLine(Environment.NewLine + "Finish. Please enter any keys.");
                 Console.ReadLine();
             }
         }
