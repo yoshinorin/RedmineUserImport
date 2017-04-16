@@ -1,5 +1,7 @@
 # RedmineUserImport
 
+[日本語はこちら](//yoshinorin.net/2017/04/16/create-redmine-user-import-from-csv/)
+
 Create user from csv file usig by [Redmine REST API](//www.redmine.org/projects/redmine/wiki/Rest_Users).
 
 # Requirements
@@ -32,7 +34,7 @@ user3,pass1113,firstName3,last3,3@example.com,false
 
 # Characterset
 
-I confirmed only UTF-8. (CSV and database)
+CSV file's characterset have to UTF-8.
 
 # Execute
 
