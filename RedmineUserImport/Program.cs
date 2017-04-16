@@ -28,7 +28,10 @@ namespace RedmineUserImport
                 WriteLog("[INFO] " +  DateTime.Now + " Start.");
 
                 int i = 0;
-                ValidateInput(input, ref i);
+                if (!ValidateInput(input, ref i))
+                {
+                    return;
+                }
 
                 client = new HttpClient();
                 if (!ValidateConnection(input[0], client))
@@ -73,7 +76,10 @@ namespace RedmineUserImport
             }
             finally
             {
-                client.Dispose();
+                if (client != null)
+                {
+                    client.Dispose();
+                }
                 WriteLog("[INFO] " + DateTime.Now + " Finish.");
                 Console.WriteLine(Environment.NewLine + "Finish. Please enter any keys.");
                 Console.ReadLine();
