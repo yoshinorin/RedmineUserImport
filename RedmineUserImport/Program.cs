@@ -39,7 +39,6 @@ namespace RedmineUserImport
                     return;
                 }
 
-                int span = i * 1000;
                 using (var sr = new StreamReader(input[2], Encoding.UTF8))
                 using (var csv = new CsvHelper.CsvReader(sr))
                 {
@@ -48,14 +47,14 @@ namespace RedmineUserImport
                     var users = csv.GetRecords<UserDetail>();
 
                     client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue(headerValue));
+                    int span = i * 1000;
                     string uri = string.Concat(input[0], userApiEndpoint, input[1]);
                     foreach (var user in users)
                     {
                         string json = Newtonsoft.Json.JsonConvert.SerializeObject(new User(user));
                         var response = client.PostAsync(uri, new StringContent(json, Encoding.UTF8, headerValue)).Result;
-                        var status = response.StatusCode.ToString();
 
-                        if (status == "Created")
+                        if (response.StatusCode.ToString() == "Created")
                         {
                             WriteLog(string.Concat("Success: ", user.Mail));
                             Console.WriteLine(string.Concat("Success: ", user.Mail));
