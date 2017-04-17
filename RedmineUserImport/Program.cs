@@ -15,6 +15,7 @@ namespace RedmineUserImport
 
         static void Main(string[] args)
         {
+            Console.WriteLine("Waiting to enter values... Please input URL and APIKey and CSV File's path below..." + Environment.NewLine);
             var input = Console.ReadLine().Split(' ');
             HttpClient client = null;
 
