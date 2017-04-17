@@ -57,12 +57,10 @@ namespace RedmineUserImport
                         if (response.StatusCode.ToString() == "Created")
                         {
                             WriteLog(string.Concat("Success: ", user.Mail));
-                            Console.WriteLine(string.Concat("Success: ", user.Mail));
                         }
                         else
                         {
                             WriteLog(string.Concat("Faild: ", user.Mail, " " , response.Content.ReadAsStringAsync().Result));
-                            Console.WriteLine(string.Concat(string.Concat("Faild: ", user.Mail, " ", response.Content.ReadAsStringAsync().Result)));                            
                         }
                         Thread.Sleep(span);
                     }
@@ -71,7 +69,6 @@ namespace RedmineUserImport
             catch (Exception ex)
             {
                 WriteLog(ex.Message);
-                Console.WriteLine(ex.Message);
             }
             finally
             {
@@ -89,7 +86,7 @@ namespace RedmineUserImport
         {
             if (input.Length > 4)
             {
-                Console.WriteLine("Please input three or four arguments.");
+                WriteLog("Please input three or four arguments.");
                 return false;
             }
 
@@ -97,14 +94,14 @@ namespace RedmineUserImport
             {
                 if (!int.TryParse(input[3], out i))
                 {
-                    Console.WriteLine("Please input a numeric value for ther fourth argument.");
+                    WriteLog("Please input a numeric value for ther fourth argument.");
                     return false;
                 }
             }
 
             if (!input[0].ToLower().StartsWith("http://") && !input[0].ToLower().StartsWith("https://"))
             {
-                Console.WriteLine("Please add 'http://' or 'https://' on your url.");
+                WriteLog("Please add 'http://' or 'https://' on your url.");
                 return false;
             }
             return true;
@@ -115,7 +112,7 @@ namespace RedmineUserImport
             var response = client.GetAsync(url).Result;
             if (response.StatusCode.ToString() != "OK")
             {
-                Console.WriteLine("Can not reach {0}", url);
+                WriteLog(string.Concat("Can not reach ", url));
                 return false;
             }
             return true;
@@ -123,6 +120,7 @@ namespace RedmineUserImport
 
         static void WriteLog(string s)
         {
+            Console.WriteLine(s);
             File.AppendAllText(logFile, s + Environment.NewLine, Encoding.UTF8);
         }
     }
