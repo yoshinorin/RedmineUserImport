@@ -27,6 +27,12 @@ namespace RedmineUserImport
                 }
                 WriteLog("[INFO] " +  DateTime.Now + " Start.");
 
+                //Convert to absolute path.
+                if (!Path.IsPathRooted(input[2]))
+                {
+                    input[2] = Path.GetFullPath(input[2]);
+                }
+
                 int i = 0;
                 if (!ValidateInput(input, ref i))
                 {
@@ -97,6 +103,12 @@ namespace RedmineUserImport
                     WriteLog("Please input a numeric value for ther fourth argument.");
                     return false;
                 }
+            }
+
+            if (!File.Exists(input[2]))
+            {
+                WriteLog("Not found CSV file.");
+                return false;
             }
 
             if (!input[0].ToLower().StartsWith("http://") && !input[0].ToLower().StartsWith("https://"))
