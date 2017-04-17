@@ -34,17 +34,15 @@ user3,pass1113,firstName3,last3,3@example.com,false
 
 # Characterset
 
-CSV file's characterset have to UTF-8.
+CSV file's characterset have to UTF-8. And I confirmed only UTF-8 database.
 
 # Execute
 
-Please execute `RedmineUserImport.exe` with arguments. Arguments must be separated by spaces.
+Please execute `RedmineUserImport.exe`. The program display next message 「Waiting to enter values... Please input URL and APIKey and CSV File's path below...」 and waits for input following values.　Please input below values. Values must be separated by spaces.
 
+## Values
 
-
-## arguments
-
-|Property|Argument number|Value|
+|Property|Number|Value|
 |---|---|---|
 |Redmine URL|1|Your Redmien URL. Need `http://` or `https://` prefix.|
 |API Key|2|Redmine API Key. (Need administrator's API Key)|
@@ -53,7 +51,7 @@ Please execute `RedmineUserImport.exe` with arguments. Arguments must be separat
 
 Below is example.
 
-`RedmineUserImport.exe http://localhost:3000 fe2c4e9d42489b77356d3c6e0c23c8d518d649bd  ./users.csv 5`
+`http://localhost:3000 fe2c4e9d42489b77356d3c6e0c23c8d518d649bd  ./users.csv 5`
 
 # API Key
 
