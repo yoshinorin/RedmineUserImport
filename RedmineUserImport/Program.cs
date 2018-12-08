@@ -10,8 +10,8 @@ namespace RedmineUserImport
     {
         private static readonly string logDir = Path.Combine(Environment.CurrentDirectory, "log");
         private static readonly string logFile = Path.Combine(Environment.CurrentDirectory, logDir,"create.log");
-        private static readonly string userApiEndpoint = "/users.json?key=";
-        private static readonly string headerValue = "application/json";
+        private static readonly string urlParameter = "/users.json?key=";
+        private static readonly string contentType = "application/json";
 
         static void Main(string[] args)
         {
@@ -53,13 +53,13 @@ namespace RedmineUserImport
                     csv.Configuration.RegisterClassMap<RedmineUserImport.UserDetailMap>();
                     var users = csv.GetRecords<UserDetail>();
 
-                    client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue(headerValue));
+                    client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue(contentType));
                     int span = i * 1000;
-                    string uri = string.Concat(input[0], userApiEndpoint, input[1]);
+                    string uri = string.Concat(input[0], urlParameter, input[1]);
                     foreach (var user in users)
                     {
                         string json = Newtonsoft.Json.JsonConvert.SerializeObject(new User(user));
-                        var response = client.PostAsync(uri, new StringContent(json, Encoding.UTF8, headerValue)).Result;
+                        var response = client.PostAsync(uri, new StringContent(json, Encoding.UTF8, contentType)).Result;
 
                         if (response.StatusCode.ToString() == "Created")
                         {
