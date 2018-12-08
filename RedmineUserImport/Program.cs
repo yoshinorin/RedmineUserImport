@@ -9,7 +9,7 @@ namespace RedmineUserImport
     class Program
     {
         private static readonly string logDir = Path.Combine(Environment.CurrentDirectory, "log");
-        private static readonly string logFile = Path.Combine(Environment.CurrentDirectory, logDir,"create.log");
+        private static readonly string logFile = Path.Combine(Environment.CurrentDirectory, logDir,"application.log");
         private static readonly string urlParameter = "/users.json?key=";
         private static readonly string contentType = "application/json";
 
