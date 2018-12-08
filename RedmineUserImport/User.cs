@@ -40,7 +40,7 @@ namespace RedmineUserImport
         public bool MustChangePasswd { get; set; }
     }
 
-    public sealed class UserDetailMap : CsvHelper.Configuration.CsvClassMap<UserDetail>
+    public sealed class UserDetailMap : CsvHelper.Configuration.ClassMap<UserDetail>
     {
         public UserDetailMap()
         {
